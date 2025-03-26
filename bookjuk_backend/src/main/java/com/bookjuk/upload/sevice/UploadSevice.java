@@ -1,4 +1,4 @@
-package com.bookjuk.upload.sevice.impl;
+package com.bookjuk.upload.sevice;
 
 import java.util.UUID;
 

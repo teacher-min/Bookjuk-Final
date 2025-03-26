@@ -38,14 +38,13 @@ import com.bookjuk.admin.repository.GenreRepository;
 import com.bookjuk.admin.repository.PublisherRepository;
 import com.bookjuk.admin.service.IProductService;
 import com.bookjuk.model.dto.PageDto;
-import com.bookjuk.upload.sevice.impl.UploadSevice;
+import com.bookjuk.upload.sevice.UploadSevice;
 import com.bookjuk.util.FileUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Transactional
-// @RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements IProductService {
 
