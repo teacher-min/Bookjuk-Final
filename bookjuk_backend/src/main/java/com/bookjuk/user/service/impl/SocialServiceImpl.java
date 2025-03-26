@@ -19,7 +19,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.bookjuk.user.domain.User;
 import com.bookjuk.user.repository.UserRepository;
 import com.bookjuk.user.service.SocialService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
