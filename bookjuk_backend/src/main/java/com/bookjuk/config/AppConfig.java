@@ -10,15 +10,25 @@ import com.bookjuk.user.dto.NaverApiDto;
 @Configuration
 public class AppConfig {
 
+  private static String naverClientId;
+  private static String naverRedirectUri;
+  private static String naverClientSecret;
+  
   @Value("${naver.client.id}")
-  private String naverClientId;
-  
+  public static void setNaverClientId(String naverClientId) {
+    AppConfig.naverClientId = naverClientId;
+  }
+
   @Value("${naver.redirect.uri}")
-  private String naverRedirectUri;
-  
+  public static void setNaverRedirectUri(String naverRedirectUri) {
+    AppConfig.naverRedirectUri = naverRedirectUri;
+  }
+
   @Value("${naver.client.secret}")
-  private String naverClientSecret;
-  
+  public static void setNaverClientSecret(String naverClientSecret) {
+    AppConfig.naverClientSecret = naverClientSecret;
+  }
+
   @Bean
   NaverApiDto naverApiDto() {
     return new NaverApiDto(naverClientId, naverRedirectUri, naverClientSecret);
