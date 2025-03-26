@@ -16,8 +16,8 @@ import com.bookjuk.api.imgbb.response.ResponseModelData;
 @Component
 public class UploadSevice {
 
-  // @Value("${imgbb.app.key}")
-  private String apiKey = "49da3534e3d444d00f9c813c930967f5";
+  @Value("${IMGBB_APP_KEY}")
+  private String apiKey;
 
   /**
    * 이미지 업로드

@@ -10,13 +10,13 @@ import com.bookjuk.user.dto.NaverApiDto;
 @Configuration
 public class AppConfig {
 
-  @Value("${naver.client-id}")
+  @Value("${NAVER_CLIENT_ID}")
   private String naverClientId;
   
-  @Value("${naver.redirect-uri}")
+  @Value("${NAVER_CLIENT_SECRET}")
   private String naverRedirectUri;
   
-  @Value("${naver.client-secret}")
+  @Value("${NAVER_CLIENT_SECRET}")
   private String naverClientSecret;
   
   @Bean
