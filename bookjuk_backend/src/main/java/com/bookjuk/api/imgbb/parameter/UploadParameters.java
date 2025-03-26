@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * A wrapper for upload POST-request parameters.
