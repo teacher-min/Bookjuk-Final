@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bookjuk.api.imgbb.ImgbbUploadClient;
@@ -12,7 +11,7 @@ import com.bookjuk.api.imgbb.parameter.UploadParameters;
 import com.bookjuk.api.imgbb.response.OptionalResponse;
 import com.bookjuk.api.imgbb.response.ResponseModelData;
 
-@Transactional
+// @Transactional
 // @Service
 @Component
 public class UploadSevice {
