@@ -32,6 +32,8 @@ services:
       - db
     ports:
       - 8080:8080
+    volumes:
+      - ./.env:./bookjuk_backend/.env
   frontend:
     container_name: frontend-container
     build: ./bookjuk_frontend
