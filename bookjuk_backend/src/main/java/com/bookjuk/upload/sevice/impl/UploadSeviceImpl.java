@@ -3,7 +3,7 @@ package com.bookjuk.upload.sevice.impl;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -14,7 +14,8 @@ import com.bookjuk.api.imgbb.response.ResponseModelData;
 import com.bookjuk.upload.sevice.UploadService;
 
 @Transactional
-@Service
+// @Service
+@Component
 public class UploadSeviceImpl implements UploadService {
 
   @Value("${IMGBB_APP_KEY}")

@@ -245,13 +245,4 @@ public class ProductController {
       return ResponseEntity.ok("이미지 URL로 성공적으로 삭제되었습니다.");
   }
   
-  
-  
 }
-
-
-        
-  
-    
-  
-
