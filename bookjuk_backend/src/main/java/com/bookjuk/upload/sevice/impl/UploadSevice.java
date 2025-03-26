@@ -11,12 +11,11 @@ import com.bookjuk.api.imgbb.ImgbbUploadClient;
 import com.bookjuk.api.imgbb.parameter.UploadParameters;
 import com.bookjuk.api.imgbb.response.OptionalResponse;
 import com.bookjuk.api.imgbb.response.ResponseModelData;
-import com.bookjuk.upload.sevice.UploadService;
 
 @Transactional
 // @Service
 @Component
-public class UploadSeviceImpl implements UploadService {
+public class UploadSevice {
 
   @Value("${IMGBB_APP_KEY}")
   private String apiKey;
@@ -28,7 +27,6 @@ public class UploadSeviceImpl implements UploadService {
    * 
    * @return                  이미지 URL
    */
-  @Override
   public synchronized String imgUpload(MultipartHttpServletRequest multipartRequest) {
     String imgUrl      = "";
     String base64Image = multipartRequest.getParameter("base64Image");

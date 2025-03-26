@@ -2,7 +2,7 @@ package com.bookjuk.upload.sevice;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-public interface UploadService {
+public interface _UploadService {
 
   /**
    * 이미지 업로드

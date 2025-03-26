@@ -38,7 +38,7 @@ import com.bookjuk.admin.repository.GenreRepository;
 import com.bookjuk.admin.repository.PublisherRepository;
 import com.bookjuk.admin.service.IProductService;
 import com.bookjuk.model.dto.PageDto;
-import com.bookjuk.upload.sevice.UploadService;
+import com.bookjuk.upload.sevice.impl.UploadSevice;
 import com.bookjuk.util.FileUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -62,13 +62,13 @@ public class ProductServiceImpl implements IProductService {
   private final ModelMapper modelMapper;
   private final PageDto pageDto;
   private final FileUtil fileUtil;
-  private final UploadService uploadService;
+  private final UploadSevice uploadService;
   
   public ProductServiceImpl(AdminProductRepository productRepository,
       AdminProductRequestRepository productRequestRepository, GenreRepository genreRepository,
       AuthorRepository authorRepository, PublisherRepository publisherRepository, IProductMapper productMapper,
       IAuthorMapper authorMapper, IPublisherMapper publisherMapper, ModelMapper modelMapper, PageDto pageDto,
-      FileUtil fileUtil, UploadService uploadService) {
+      FileUtil fileUtil, UploadSevice uploadService) {
     super();
     this.productRepository = productRepository;
     this.productRequestRepository = productRequestRepository;
