@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.bookjuk.admin.domain.Author;
 import com.bookjuk.admin.dto.AuthorDto;
 import com.bookjuk.admin.dto.GenreDto;
 import com.bookjuk.admin.dto.ProductDto;

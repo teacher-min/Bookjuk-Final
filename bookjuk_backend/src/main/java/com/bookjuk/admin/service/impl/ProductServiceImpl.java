@@ -40,15 +40,12 @@ import com.bookjuk.admin.service.IProductService;
 import com.bookjuk.model.dto.PageDto;
 import com.bookjuk.upload.sevice.UploadService;
 import com.bookjuk.util.FileUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import lombok.RequiredArgsConstructor;
-
 @Transactional
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements IProductService {
 
@@ -67,6 +64,26 @@ public class ProductServiceImpl implements IProductService {
   private final FileUtil fileUtil;
   private final UploadService uploadService;
   
+  public ProductServiceImpl(AdminProductRepository productRepository,
+      AdminProductRequestRepository productRequestRepository, GenreRepository genreRepository,
+      AuthorRepository authorRepository, PublisherRepository publisherRepository, IProductMapper productMapper,
+      IAuthorMapper authorMapper, IPublisherMapper publisherMapper, ModelMapper modelMapper, PageDto pageDto,
+      FileUtil fileUtil, UploadService uploadService) {
+    super();
+    this.productRepository = productRepository;
+    this.productRequestRepository = productRequestRepository;
+    this.genreRepository = genreRepository;
+    this.authorRepository = authorRepository;
+    this.publisherRepository = publisherRepository;
+    this.productMapper = productMapper;
+    this.authorMapper = authorMapper;
+    this.publisherMapper = publisherMapper;
+    this.modelMapper = modelMapper;
+    this.pageDto = pageDto;
+    this.fileUtil = fileUtil;
+    this.uploadService = uploadService;
+  }
+
   @Value("${spring.servlet.multipart.location}")
   private String uploadDir;
   

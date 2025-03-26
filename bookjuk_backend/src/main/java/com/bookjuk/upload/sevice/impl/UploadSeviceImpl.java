@@ -1,19 +1,19 @@
 package com.bookjuk.upload.sevice.impl;
 
 import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.bookjuk.api.imgbb.ImgbbUploadClient;
 import com.bookjuk.api.imgbb.parameter.UploadParameters;
 import com.bookjuk.api.imgbb.response.OptionalResponse;
 import com.bookjuk.api.imgbb.response.ResponseModelData;
 import com.bookjuk.upload.sevice.UploadService;
-import lombok.RequiredArgsConstructor;
 
 @Transactional
-@RequiredArgsConstructor
 @Service
 public class UploadSeviceImpl implements UploadService {
 
