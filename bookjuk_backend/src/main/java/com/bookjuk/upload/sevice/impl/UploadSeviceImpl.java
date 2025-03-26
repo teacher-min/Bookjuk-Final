@@ -50,7 +50,7 @@ public class UploadSeviceImpl implements UploadService {
       if (response.get().isUploadedSuccess()) {
         ResponseModelData data = response.get().getResponseData();
         imgUrl = data.getImageUrl();
-        String deleteUrl = data.getDeleteUrl(); // url 로 접속 후 삭제를 직접 진행 해야 함
+        //String deleteUrl = data.getDeleteUrl(); // url 로 접속 후 삭제를 직접 진행 해야 함
       }
       else {
         System.out.println(response.get().getRequestStatus());
