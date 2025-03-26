@@ -2,7 +2,6 @@ package com.bookjuk.upload.sevice;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -10,14 +9,12 @@ import com.bookjuk.api.imgbb.ImgbbUploadClient;
 import com.bookjuk.api.imgbb.parameter.UploadParameters;
 import com.bookjuk.api.imgbb.response.OptionalResponse;
 import com.bookjuk.api.imgbb.response.ResponseModelData;
+import com.bookjuk.config.AppConfig;
 
 // @Transactional
 // @Service
 @Component
 public class UploadSevice {
-
-  @Value("${IMGBB_APP_KEY}")
-  private String apiKey;
 
   /**
    * 이미지 업로드
@@ -40,7 +37,7 @@ public class UploadSevice {
     try {
       // Image Server Upload //
       UploadParameters paremeters = new UploadParameters.Builder()
-          .apiKey(apiKey)
+          .apiKey(AppConfig.apiKey)
           .imageName(UUID.randomUUID().toString())
           .imageBase64(base64Image).build();
 
