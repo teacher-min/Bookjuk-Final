@@ -25,12 +25,7 @@ import com.bookjuk.user.service.SocialService;
 public class SocialServiceImpl implements SocialService {
   
   private final UserRepository userRepository;
-   
-  public SocialServiceImpl(UserRepository userRepository) {
-    super();
-    this.userRepository = userRepository;
-  }
-
+  
   @Value("${naver.client-id}")
   private String naverClientId;
   
@@ -39,6 +34,11 @@ public class SocialServiceImpl implements SocialService {
   
   @Value("${naver.client-secret}")
   private String naverClientSecret;
+   
+  public SocialServiceImpl(UserRepository userRepository) {
+    super();
+    this.userRepository = userRepository;
+  }
   
   /* 카카오 간편 로그인*/
    @Override

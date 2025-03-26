@@ -1,5 +1,4 @@
-volumes:
-  mysql_vol:
+version: 3.8
 services:
   db:
     container_name: mysql-container
@@ -49,3 +48,5 @@ services:
       - backend
     ports:
       - 80:80
+volumes:
+  mysql_vol:

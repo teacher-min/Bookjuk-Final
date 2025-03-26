@@ -1,6 +1,5 @@
 package com.bookjuk.user.service.impl;
 
-
 import java.time.LocalDateTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,13 +13,12 @@ import com.bookjuk.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
-
 @Transactional
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
 
-  private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+  private final BCryptPasswordEncoder encoder;
   private final ModelMapper modelMapper;
   private final UserRepository userRepository;
 
