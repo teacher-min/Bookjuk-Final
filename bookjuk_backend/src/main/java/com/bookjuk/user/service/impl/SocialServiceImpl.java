@@ -20,18 +20,27 @@ import com.bookjuk.user.domain.User;
 import com.bookjuk.user.repository.UserRepository;
 import com.bookjuk.user.service.SocialService;
 
-import lombok.RequiredArgsConstructor;
-
 @Transactional
-@RequiredArgsConstructor
 @Service
-
 public class SocialServiceImpl implements SocialService {
   
   private final UserRepository userRepository;
    
-   
-   /* 카카오 간편 로그인*/
+  public SocialServiceImpl(UserRepository userRepository) {
+    super();
+    this.userRepository = userRepository;
+  }
+
+  @Value("${naver.client-id}")
+  private String naverClientId;
+  
+  @Value("${naver.redirect-uri}")
+  private String naverRedirectUri;
+  
+  @Value("${naver.client-secret}")
+  private String naverClientSecret;
+  
+  /* 카카오 간편 로그인*/
    @Override
    public Map<String, Object>  getKakaoUser(String accessToken) {
     
@@ -70,15 +79,6 @@ public class SocialServiceImpl implements SocialService {
    }
    
   }
-   
-   @Value("${naver.client-id}")
-   private String naverClientId;
-   
-   @Value("${naver.redirect-uri}")
-   private String naverRedirectUri;
-   
-   @Value("${naver.client-secret}")
-   private String naverClientSecret;
    
    @Override
    public Map<String, Object> getNaverToken(String code, String state) {
