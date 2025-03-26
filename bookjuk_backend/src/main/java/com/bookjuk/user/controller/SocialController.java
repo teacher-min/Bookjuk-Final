@@ -32,7 +32,6 @@ public class SocialController {
     return socialService.getKakaoUser(accessToken);
   }
   
-  
   @PostMapping("/api/user/naver")
   public ResponseEntity<Map<String, Object>> getnaverLogin(@RequestBody Map<String, Object> request) {
     String code = (String) request.get("code");
@@ -42,8 +41,6 @@ public class SocialController {
     Map<String, Object> response = socialService.getNaverToken(code, state);
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }
-  
-  
   
   // 카카오 간편 가입
   @PostMapping("/api/user/easySignup") 

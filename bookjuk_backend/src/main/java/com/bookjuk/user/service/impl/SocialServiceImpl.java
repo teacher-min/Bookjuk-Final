@@ -3,7 +3,6 @@ package com.bookjuk.user.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,28 +16,19 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.bookjuk.user.domain.User;
+import com.bookjuk.user.dto.NaverApiDto;
 import com.bookjuk.user.repository.UserRepository;
 import com.bookjuk.user.service.SocialService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Transactional
 @Service
 public class SocialServiceImpl implements SocialService {
   
   private final UserRepository userRepository;
-  
-  @Value("${naver.client-id}")
-  private String naverClientId;
-  
-  @Value("${naver.redirect-uri}")
-  private String naverRedirectUri;
-  
-  @Value("${naver.client-secret}")
-  private String naverClientSecret;
-   
-  public SocialServiceImpl(UserRepository userRepository) {
-    super();
-    this.userRepository = userRepository;
-  }
+  private final NaverApiDto naverApiDto;
   
   /* 카카오 간편 로그인*/
    @Override
@@ -85,9 +75,9 @@ public class SocialServiceImpl implements SocialService {
      
      String url = UriComponentsBuilder.fromHttpUrl("https://nid.naver.com/oauth2.0/token")
            .queryParam("grant_type", "authorization_code")
-           .queryParam("client_id",  naverClientId)
-           .queryParam("client_secret", naverClientSecret)
-           .queryParam("redirect_uri", naverRedirectUri)
+           .queryParam("client_id",  naverApiDto.getNaverClientId())
+           .queryParam("client_secret", naverApiDto.getNaverClientSecret())
+           .queryParam("redirect_uri", naverApiDto.getNaverRedirectUri())
            .queryParam("code", code)
            .queryParam("state", state)
            .toUriString();
