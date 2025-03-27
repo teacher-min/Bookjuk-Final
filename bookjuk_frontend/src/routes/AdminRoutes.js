@@ -5,7 +5,7 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const Loading = <div>Loading...</div>
 
@@ -31,31 +31,29 @@ const AdminOrderDetailPage = lazy(() => import('../pages/admin/order/AdminOrderD
 const AdminRoutes = () => {
 
   return (
-    <BrowserRouter>
-      <Route path="/" element={AdminPage}>
-        <Suspense fallback={Loading}>
-          <Routes>
-            <Route index element={AdminDashboardPage} />
-            <Route path="/loginlog"  element={LoginLogPage} />
-            <Route path="/deletelog"  element={DeleteLogPage} />
-            <Route path="/product/list"  element={AdminProductListPage} />
-            <Route path="/product/regist"  element={AdminProductRegistPage} />
-            <Route path="/product/detail/:productId"  element={AdminProductDetailPage} />
-            <Route path="/product/edit/:productId"  element={AdminProductEditPage} />
-            <Route path="/secondhand"  element={AdminSecondHandListPage} />
-            <Route path="/secondhand/:secondhandId"  element={AdminSecondHandDetailPage} />
-            <Route path="/qna"  element={AdminQnAListPage} />
-            <Route path="/qna/:qnaId"  element={AdminQnADetailPage} />
-            <Route path="/inquiry"  element={AdminInquiryListPage} />
-            <Route path="/inquiry:inquiryId"  element={AdminInquiryDetailPage} />
-            <Route path="/review"  element={AdminReviewListPage} />
-            <Route path="/review/:inquireviewIdryId"  element={AdminReviewDetailPage} />
-            <Route path="/order"  element={AdminOrderListPage} />
-            <Route path="/order/:orderId"  element={AdminOrderDetailPage} />
-          </Routes>
-        </Suspense>
-      </Route>
-    </BrowserRouter>
+    <Suspense fallback={Loading}>
+      <Routes>
+        <Route path="/"                            element={<AdminPage/>}>
+          <Route index                             element={<AdminDashboardPage/>} />
+          <Route path="/loginlog"                  element={<LoginLogPage/>} />
+          <Route path="/deletelog"                 element={<DeleteLogPage/>} />
+          <Route path="/product/list"              element={<AdminProductListPage/>} />
+          <Route path="/product/regist"            element={<AdminProductRegistPage/>} />
+          <Route path="/product/detail/:productId" element={<AdminProductDetailPage/>} />
+          <Route path="/product/edit/:productId"   element={<AdminProductEditPage/>} />
+          <Route path="/secondhand"                element={<AdminSecondHandListPage/>} />
+          <Route path="/secondhand/:secondhandId"  element={<AdminSecondHandDetailPage/>} />
+          <Route path="/qna"                       element={<AdminQnAListPage/>} />
+          <Route path="/qna/:qnaId"                element={<AdminQnADetailPage/>} />
+          <Route path="/inquiry"                   element={<AdminInquiryListPage/>} />
+          <Route path="/inquiry:inquiryId"         element={<AdminInquiryDetailPage/>} />
+          <Route path="/review"                    element={<AdminReviewListPage/>} />
+          <Route path="/review/:inquireviewIdryId" element={<AdminReviewDetailPage/>} />
+          <Route path="/order"                     element={<AdminOrderListPage/>} />
+          <Route path="/order/:orderId"            element={<AdminOrderDetailPage/>} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 
 };

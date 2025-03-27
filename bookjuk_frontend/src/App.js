@@ -7,10 +7,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { RouterProvider } from 'react-router-dom';
 import { useState } from 'react';
 import { UserContext } from './components/common/UserContext'; // Context 불러오기
-
+import RootRouter from './routes/RootRouter';
 
 function App() {
 
@@ -19,7 +18,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{ loginFlag, setLoginFlag, cartItemCount, setCartItemCount }}>
-      <RouterProvider router={rootRouter} />
+      <RootRouter/>
     </UserContext.Provider>
   )
 

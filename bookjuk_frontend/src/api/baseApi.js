@@ -8,7 +8,7 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true; // withCredentials 전역 설정
 
-const API_HOST = 'http://3.34.196.178:8080/api';
+const API_HOST = 'http://localhost:8080/api';
 const ADMIN_REQUEST_URL = `${API_HOST}/admin`;
 const MAIN_REQUEST_URL = `${API_HOST}/main`;
 const USER_REQUEST_URL = `${API_HOST}/user`;

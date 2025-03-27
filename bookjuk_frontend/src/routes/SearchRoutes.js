@@ -5,21 +5,19 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const Loading = <div>Loading...</div>
-const SearchResultPage = lazy(('../pages/product/SearchResultPage'));
+const SearchResultPage = lazy(() => import('../pages/product/SearchResultPage'));
 
 const SearchRoutes = () => {
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={Loading}>
-        <Routes>
-          <Route path="/results" element={<SearchResultPage />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <Suspense fallback={Loading}>
+      <Routes>
+        <Route path="/results" element={<SearchResultPage />} />
+      </Routes>
+    </Suspense>
   );
 
 };

@@ -39,7 +39,6 @@ import io.portone.sdk.server.webhook.Webhook;
 import io.portone.sdk.server.webhook.WebhookTransaction;
 import io.portone.sdk.server.webhook.WebhookVerifier;
 import kotlin.Unit;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
@@ -49,31 +48,37 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class PaymentServiceImpl implements IPaymentService {
-
-  // 결제 정보를 저장하는 임시 메모리(실제 환경에서는 데이터베이스를 사용해야 함)
-  private static final Map<String, Payment> paymentStore = new HashMap<>();
-  private static final ObjectMapper         objectMapper = new ObjectMapper();
-
+  
   // 서비스 의존성 (장바구니 서비스 및 상품 리포지토리)
   private final ICartService      iCartService;
   private final ProductRepository productRepository;
   private final PayRepository     payRepository;
   private final IOrderService     iOrderService;
+  
+  public PaymentServiceImpl(ICartService iCartService, ProductRepository productRepository, PayRepository payRepository, IOrderService iOrderService) {
+    this.iCartService = iCartService;
+    this.productRepository = productRepository;
+    this.payRepository = payRepository;
+    this.iOrderService = iOrderService;
+  }
+
+  // 결제 정보를 저장하는 임시 메모리(실제 환경에서는 데이터베이스를 사용해야 함)
+  private static final Map<String, Payment> paymentStore = new HashMap<>();
+  private static final ObjectMapper         objectMapper = new ObjectMapper();
 
   // 포트원 결제 클라이언트와 커스텀 결제 클라이언트, 그리고 웹훅 검증 객체를 초기화합니다.
   // 실제 환경에서는 비밀정보를 별도 프로퍼티 파일이나 시크릿 매니저로 관리해야 합니다.
   private final PaymentClient       portone        = new PaymentClient(
-      EnvConfig.getPortoneSecretApi(),
+      "pWw5BI1fPoncJnEuZ6PF5ILF9Svx3hLEu2UaAg72S5XJbJa5yEHgQFAT5eYVXJRjUnhypozpWzhHvGeg",//EnvConfig.getPortoneSecretApi(),
       "https://api.portone.io", null
   );
   private final CustomPaymentClient customPortone  = new CustomPaymentClient(
-      EnvConfig.getPortoneSecretApi(),
+      "pWw5BI1fPoncJnEuZ6PF5ILF9Svx3hLEu2UaAg72S5XJbJa5yEHgQFAT5eYVXJRjUnhypozpWzhHvGeg",//EnvConfig.getPortoneSecretApi(),
       "https://api.portone.io", null
   );
   private final WebhookVerifier     portoneWebhook = new WebhookVerifier(
-      EnvConfig.getPortoneSecretWebhook()
+      "whsec_+wCY1q64BB0Mm2BzrPr4UXIIA3UDowwJu6SIE4e8S14="//EnvConfig.getPortoneSecretWebhook()
   );
 
   /**

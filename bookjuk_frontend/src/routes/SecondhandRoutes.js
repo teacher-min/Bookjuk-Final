@@ -5,7 +5,7 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const Loading = <div>Loading...</div>
 const SecondHandPage = lazy(() => import('../pages/secondhand/SecondHandPage'))
@@ -16,16 +16,14 @@ const SecondHandModifyPage = lazy(() => import('../pages/secondhand/SecondHandMo
 const SecondhandRoutes = () => {
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={Loading}>
-        <Routes>
-          <Route path="/" element={SecondHandPage} />
-          <Route path="/regist" element={SecondHandRegistPage} />
-          <Route path="/detail/:id" element={SecondHandDetailPage} />
-          <Route path="/modify/:id" element={SecondHandModifyPage} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <Suspense fallback={Loading}>
+      <Routes>
+        <Route path="/"           element={<SecondHandPage/>} />
+        <Route path="/regist"     element={<SecondHandRegistPage/>} />
+        <Route path="/detail/:id" element={<SecondHandDetailPage/>} />
+        <Route path="/modify/:id" element={<SecondHandModifyPage/>} />
+      </Routes>
+    </Suspense>
   );
 
 };

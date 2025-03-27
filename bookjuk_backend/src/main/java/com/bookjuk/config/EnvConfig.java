@@ -6,26 +6,48 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class EnvConfig {
 
-  @Value("${naver.client.id}")
   private static String naverClientId;
+  private static String naverRedirectUri;
+  private static String naverClientSecret;
+  private static String uploadDir;
+  private static String apiKey;
+  private static String portoneSecretApi;
+  private static String portoneSecretWebhook;
+  
+  @Value("${naver.client.id}")
+  public static void setNaverClientId(String naverClientId) {
+    EnvConfig.naverClientId = naverClientId;
+  }
   
   @Value("${naver.redirect.uri}")
-  private static String naverRedirectUri;
+  public static void setNaverRedirectUri(String naverRedirectUri) {
+    EnvConfig.naverRedirectUri = naverRedirectUri;
+  }
   
   @Value("${naver.client.secret}")
-  private static String naverClientSecret;
-  
+  public static void setNaverClientSecret(String naverClientSecret) {
+    EnvConfig.naverClientSecret = naverClientSecret;
+  }
+
   @Value("${spring.servlet.multipart.location}")
-  private static String uploadDir;
-  
+  public static void setUploadDir(String uploadDir) {
+    EnvConfig.uploadDir = uploadDir;
+  }
+
   @Value("${imgbb.app.key}")
-  private static String apiKey;
+  public static void setApiKey(String apiKey) {
+    EnvConfig.apiKey = apiKey;
+  }
 
   @Value("${portone.secret.api}")
-  private static String portoneSecretApi;
+  public static void setPortoneSecretApi(String portoneSecretApi) {
+    EnvConfig.portoneSecretApi = portoneSecretApi;
+  }
 
   @Value("${portone.secret.webhook}")
-  private static String portoneSecretWebhook;
+  public static void setPortoneSecretWebhook(String portoneSecretWebhook) {
+    EnvConfig.portoneSecretWebhook = portoneSecretWebhook;
+  }
 
   public static String getNaverClientId() {
     return naverClientId;

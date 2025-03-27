@@ -5,8 +5,6 @@
  */
 
 import React from "react";
-import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import LoginLogComp from "../../../components/admin/log/LoginLogComp";
 
 const LoginLogPage = () => {
