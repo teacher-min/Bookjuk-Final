@@ -4,22 +4,27 @@
  * Developer : 김민희
  */
 
-import { Route, Routes } from 'react-router-dom';
-import FAQPage from '../pages/faq/FAQPage';
-import FAQRegistPage from '../pages/faq/FAQRegistPage';
-import FAQDetailPage from '../pages/faq/FAQDetailPage';
-import FAQModifyPage from '../pages/faq/FAQModifyPage';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+const Loading = <div>Loading...</div>
+const FAQPage = lazy(('../pages/faq/FAQPage'));
+const FAQRegistPage = lazy(('../pages/faq/FAQRegistPage'));
+const FAQDetailPage = lazy(('../pages/faq/FAQDetailPage'));
+const FAQModifyPage = lazy(('../pages/faq/FAQModifyPage'));
 
 const FaqRoutes = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<FAQPage />} />
-        <Route path="/regist" element={<FAQRegistPage />} />
-        <Route path="/detail/:id" element={<FAQDetailPage />} />
-        <Route path="/modify/:id" element={<FAQModifyPage />} />
-      </Routes>
-    </>
+    <BrowserRouter>
+      <Suspense fallback={Loading}>
+        <Routes>
+          <Route path="/" element={FAQPage} />
+          <Route path="/regist" element={FAQRegistPage} />
+          <Route path="/detail/:id" element={FAQDetailPage} />
+          <Route path="/modify/:id" element={FAQModifyPage} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 };
 

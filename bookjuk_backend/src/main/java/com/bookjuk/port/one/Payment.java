@@ -1,6 +1,3 @@
 package com.bookjuk.port.one;
 
-public record Payment(
-        String status
-) {
-}
+public record Payment(String status) { }

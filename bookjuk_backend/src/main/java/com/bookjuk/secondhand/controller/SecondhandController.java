@@ -1,59 +1,44 @@
 package com.bookjuk.secondhand.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bookjuk.config.EnvConfig;
 import com.bookjuk.model.message.ResponseMessage;
-import com.bookjuk.secondhand.dto.SecondhandDto;
-import com.bookjuk.secondhand.dto.SecondhandInsertDto;
 import com.bookjuk.secondhand.service.SecondhandService;
-import com.bookjuk.util.FileUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-
-
-
-
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "중고상품", description = "중고상품 API")
 public class SecondhandController {
 
   private final SecondhandService secondhandService;
-  
-  @Value("${spring.servlet.multipart.location}")
-  private String uploadDir;
   
   @Operation(summary = "중고상품 목록 조회", description = "중고상품 목록을 확인하는 기능입니다.")
   @GetMapping(value = "/secondhand", produces = "application/json")
@@ -147,7 +132,7 @@ public class SecondhandController {
                                            @PathVariable String fileName) {   
       try {
           // 이미지 파일의 실제 경로를 지정합니다.
-          Path imagePath = Paths.get(uploadDir + "upload/" + year + "/" + month + "/" + day + "/" + fileName);
+          Path imagePath = Paths.get(EnvConfig.getUploadDir() + "upload/" + year + "/" + month + "/" + day + "/" + fileName);
           File imageFile = imagePath.toFile();
           //System.out.println(imagePath.toString());
           

@@ -3,6 +3,7 @@ package com.bookjuk.upload;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import lombok.RequiredArgsConstructor;
 
+@RequestMapping("/api")
 @Tag(name = "이미지 업로드", description = "이미지 업로드 API")
 @RequiredArgsConstructor
 @RestController

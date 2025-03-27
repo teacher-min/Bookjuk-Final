@@ -15,7 +15,7 @@ export const postNaverSignup = async (user) => {
   return response;
 }
 
-//카카오 간편 로그인
+// 카카오 간편 로그인
 export const postKakao = async (code) => {
   const header = {
     headers: {

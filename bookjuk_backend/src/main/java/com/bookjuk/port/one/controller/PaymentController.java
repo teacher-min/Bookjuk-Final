@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
@@ -16,6 +17,7 @@ import reactor.core.publisher.Mono;
  * PaymentController는 결제 완료 요청과 웹훅 요청을 처리합니다.
  * 클라이언트(브라우저 또는 PG사)에서 요청한 결제 결과를 받아 서비스 레이어로 전달합니다.
  */
+@RequestMapping("/api")
 @RestController
 @RequiredArgsConstructor
 public final class PaymentController {
@@ -34,7 +36,7 @@ public final class PaymentController {
    * @param completeRequest 결제 완료 요청 정보
    * @return Mono&lt;Payment&gt; 결제 상태를 포함한 비동기 응답
    */
-  @PostMapping("/api/payment/complete")
+  @PostMapping("/payment/complete")
   public Mono<Payment> completePayment(@RequestBody CompletePaymentRequest completeRequest) {
     return paymentService.syncPayment(completeRequest.paymentId);
   }
@@ -52,7 +54,7 @@ public final class PaymentController {
    * @return Mono&lt;Unit&gt; 웹훅 처리 결과
    * @throws SyncPaymentException 웹훅 검증 실패 시 발생하는 예외
    */
-  @PostMapping("/api/payment/webhook")
+  @PostMapping("/payment/webhook")
   public Mono<Unit> handleWebhook(
       @RequestBody String body,
       @RequestHeader("webhook-id") String webhookId,
@@ -61,11 +63,5 @@ public final class PaymentController {
   ) throws SyncPaymentException {
     return paymentService.handleWebhook(body, webhookId, webhookTimestamp, webhookSignature);
   }
+  
 }
-
-
-
-
-
-
-

@@ -20,9 +20,8 @@ public class SecuirtyConfig {
     CorsConfiguration configuration = new CorsConfiguration();
     configuration.setAllowedHeaders(Arrays.asList("Origin", "Cache-Control", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization"));
     configuration.setAllowedMethods(Arrays.asList("HEAD", "OPTIONS", "GET", "POST", "PUT", "DELETE", "PATCH"));
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // 리액트 서버
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://3.34.196.178")); // 리액트 서버
     configuration.setAllowCredentials(true);
-    
     return request -> configuration;
   }
   
@@ -42,22 +41,20 @@ public class SecuirtyConfig {
         
     httpSecurity.authorizeHttpRequests(auth -> {
         auth//.requestMatchers("/admin/**").hasAuthority(UserRole.ADMIN.getUserRole()) // GET "/admin/**" 요청은 ADMIN userRole을 가진 사용자만 접근 가능합니다.
-            .requestMatchers("/auth/**").authenticated()                             // GET "/auth/**" 요청은 인가된 사용자만 접근 가능합니다.
+            //.requestMatchers("/auth/**").authenticated()                             // GET "/auth/**" 요청은 인가된 사용자만 접근 가능합니다.
             .anyRequest().permitAll();
     });
-    
-    
         
     // 로그인 설정을 처리합니다.
     httpSecurity.formLogin(login -> {
-      login.loginPage("/api/user/login")             // GET "/user/login" 요청 시로그인 페이지로 이동함
-           .loginProcessingUrl("/user/login")    // POST "/user/login" 요청 시 로그인을 함
+      login.loginPage("/user/login")             // GET "/user/login" 요청 시로그인 페이지로 이동함
+           .loginProcessingUrl("/api/user/login")    // POST "/user/login" 요청 시 로그인을 함
            .usernameParameter("userEmail")       // 로그인 폼에서 input 태그의 name이 userEmail로 설정되어야함
            .passwordParameter("userPw")          // 로그인 폼에서 input 태그의 name이 userPw로 설정되어야함
            .defaultSuccessUrl("/user/loginSuccess", true);       // 로그인 성공시 UserController에 있는 @GetMapping("/loginSuccess") 확인 가능합니다.       
     });
     
-    //로그아웃을 관리합니다.
+    // 로그아웃을 관리합니다.
     httpSecurity.logout(logout -> {
       logout.logoutUrl("/user/logout")
             .logoutSuccessUrl("/user/logoutSuccess");
@@ -70,8 +67,6 @@ public class SecuirtyConfig {
     
     
   }
-  
-
   
   /*
    * BCrypt 암호화 메소드

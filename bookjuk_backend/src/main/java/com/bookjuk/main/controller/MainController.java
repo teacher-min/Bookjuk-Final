@@ -1,23 +1,30 @@
 package com.bookjuk.main.controller;
 
 import java.util.Map;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.bookjuk.main.service.MainProductService;
 import com.bookjuk.model.message.ResponseMessage;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 메인 페이지에 출력할 신상, 추천, 인기 도서 목록 호출 API 컨트롤러 (리예)
  */
+@RequestMapping("/api")
 @Tag(name = "메인", description = "메인 도서 목록 API")
-@RequiredArgsConstructor
 @RestController
 public class MainController {
 
   private final MainProductService productService;
+  
+  public MainController(MainProductService productService) {
+    this.productService = productService;
+  }
 
   /** 메인 페이지에서 출력할 상품 갯수 */
   private final int PRODUCT_COUNT = 5;

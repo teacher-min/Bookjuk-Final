@@ -4,21 +4,28 @@
  * Developer : 조범희
  */
 
-import { Route, Routes } from 'react-router-dom';
-import OrderUserPage from '../pages/order/OrderUserPage';
-import MyOrderPage from '../pages/order/MyOrderPage';
-import OrderDetailPage from '../pages/order/OrderDetailPage';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+const Loading = <div>Loading...</div>
+const OrderUserPage = lazy(('../pages/order/OrderUserPage'));
+const MyOrderPage = lazy(('../pages/order/MyOrderPage'));
+const OrderDetailPage = lazy(('../pages/order/OrderDetailPage'));
 
 const OrderRoutes = () => {
+
   return (
-    <>
-      <Routes>
-        <Route path="/user" element={<OrderUserPage />} />
-        <Route path="/myOrder" element={<MyOrderPage />} />
-        <Route path="/Detail" element={<OrderDetailPage />} />
-      </Routes>
-    </>
+    <BrowserRouter>
+      <Suspense fallback={Loading}>
+        <Routes>
+          <Route path="/user" element={OrderUserPage} />
+          <Route path="/myOrder" element={MyOrderPage} />
+          <Route path="/Detail" element={OrderDetailPage} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
+
 };
 
 export default OrderRoutes;

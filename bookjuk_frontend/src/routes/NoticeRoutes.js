@@ -4,22 +4,27 @@
  * Developer : 김민희
  */
 
-import { Route, Routes } from 'react-router-dom';
-import NoticePage from '../pages/notice/NoticePage';
-import NoticeRegistPage from '../pages/notice/NoticeRegistPage';
-import NoticeDetailPage from '../pages/notice/NoticeDetailPage';
-import NoticeModifyPage from '../pages/notice/NoticeModifyPage';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+const Loading = <div>Loading...</div>
+const NoticePage = lazy(('../pages/notice/NoticePage'));
+const NoticeRegistPage = lazy(('../pages/notice/NoticeRegistPage'));
+const NoticeDetailPage = lazy(('../pages/notice/NoticeDetailPage'));
+const NoticeModifyPage = lazy(('../pages/notice/NoticeModifyPage'));
 
 const NoticeRoutes = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<NoticePage />} />
-        <Route path="/regist" element={<NoticeRegistPage />} />
-        <Route path="/detail/:id" element={<NoticeDetailPage />} />
-        <Route path="/modify/:id" element={<NoticeModifyPage />} />
-      </Routes>
-    </>
+    <BrowserRouter>
+      <Suspense fallback={Loading}>
+        <Routes>
+          <Route path="/" element={NoticePage} />
+          <Route path="/regist" element={NoticeRegistPage} />
+          <Route path="/detail/:id" element={NoticeDetailPage} />
+          <Route path="/modify/:id" element={NoticeModifyPage} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 };
 

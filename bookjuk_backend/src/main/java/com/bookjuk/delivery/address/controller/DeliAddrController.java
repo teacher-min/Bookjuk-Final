@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bookjuk.delivery.address.dto.DeliAddrDto;
 import com.bookjuk.delivery.address.service.IDeliAddrService;
 import com.bookjuk.model.message.ResponseMessage;
 import lombok.RequiredArgsConstructor;
 
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @RestController
 public class DeliAddrController {

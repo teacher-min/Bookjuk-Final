@@ -9,10 +9,8 @@ import com.bookjuk.api.imgbb.ImgbbUploadClient;
 import com.bookjuk.api.imgbb.parameter.UploadParameters;
 import com.bookjuk.api.imgbb.response.OptionalResponse;
 import com.bookjuk.api.imgbb.response.ResponseModelData;
-import com.bookjuk.config.AppConfig;
+import com.bookjuk.config.EnvConfig;
 
-// @Transactional
-// @Service
 @Component
 public class UploadSevice {
 
@@ -37,7 +35,7 @@ public class UploadSevice {
     try {
       // Image Server Upload //
       UploadParameters paremeters = new UploadParameters.Builder()
-          .apiKey(AppConfig.apiKey)
+          .apiKey(EnvConfig.getApiKey())
           .imageName(UUID.randomUUID().toString())
           .imageBase64(base64Image).build();
 

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ import com.bookjuk.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @RestController
 public class SocialController {
@@ -25,7 +27,6 @@ public class SocialController {
   private final UserService userService; 
   private final SocialService socialService;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
-  
   
   @GetMapping("/api/user/kakao")
   public Map<String, Object> kakaoLogin(@RequestParam(name = "accessToken") String accessToken) {
@@ -62,7 +63,6 @@ public class SocialController {
     return ResponseEntity.ok().body(Map.of("message", "회원가입 완료", "user", newUser));
   }
   
-  
   // 네이버 간편 가입
   @PostMapping("/api/user/naverSignup") 
   public ResponseEntity<Map<String, Object>> naverSignup(@RequestBody Map<String, String> body) {
@@ -82,7 +82,6 @@ public class SocialController {
 
     userService.saveUser(newUser);
     
-
     // 회원가입 후 로그인 처리
     return ResponseEntity.ok().body(Map.of("message", "회원가입 완료", "user", newUser));
   }

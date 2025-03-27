@@ -15,8 +15,8 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.bookjuk.config.EnvConfig;
 import com.bookjuk.user.domain.User;
-import com.bookjuk.user.dto.NaverApiDto;
 import com.bookjuk.user.repository.UserRepository;
 import com.bookjuk.user.service.SocialService;
 
@@ -28,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class SocialServiceImpl implements SocialService {
   
   private final UserRepository userRepository;
-  private final NaverApiDto naverApiDto;
   
   /* 카카오 간편 로그인*/
    @Override
@@ -75,9 +74,9 @@ public class SocialServiceImpl implements SocialService {
      
      String url = UriComponentsBuilder.fromHttpUrl("https://nid.naver.com/oauth2.0/token")
            .queryParam("grant_type", "authorization_code")
-           .queryParam("client_id",  naverApiDto.getNaverClientId())
-           .queryParam("client_secret", naverApiDto.getNaverClientSecret())
-           .queryParam("redirect_uri", naverApiDto.getNaverRedirectUri())
+           .queryParam("client_id",  EnvConfig.getNaverClientId())
+           .queryParam("client_secret", EnvConfig.getNaverClientSecret())
+           .queryParam("redirect_uri", EnvConfig.getNaverRedirectUri())
            .queryParam("code", code)
            .queryParam("state", state)
            .toUriString();

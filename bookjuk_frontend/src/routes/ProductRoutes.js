@@ -4,21 +4,30 @@
  * Developer : 이수정
  */
 
-import { Route, Routes } from 'react-router-dom';
-import ProductPage from '../pages/product/ProductPage';
-import ProductDetailPage from '../pages/product/ProductDetailPage';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+const Loading = <div>Loading...</div>
+const ProductPage = lazy(() => import('../pages/product/ProductPage'))
+const ProductNewPage = lazy(() => import('../pages/product/ProductNewPage'))
+const ProductPopularPage = lazy(() => import('../pages/product/ProductPopularPage'))
+const ProductDetailPage = lazy(() => import('../pages/product/ProductDetailPage'))
 
 const ProductRoutes = () => {
+
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<ProductPage />} />
-        {/* <Route path="/new" element={<ProductNewPage />} /> 
-        <Route path="/popular" element={<ProductPopularPage />} /> */}
-        <Route path="/detail/:productId" element={<ProductDetailPage />} />
-      </Routes>
-    </>
+    <BrowserRouter>
+      <Suspense fallback={Loading}>
+        <Routes>
+          <Route path="/" element={ProductPage} />
+          <Route path="/new" element={ProductNewPage} /> 
+          <Route path="/popular" element={ProductPopularPage} />
+          <Route path="/detail/:productId" element={ProductDetailPage} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
+
 };
 
 export default ProductRoutes;

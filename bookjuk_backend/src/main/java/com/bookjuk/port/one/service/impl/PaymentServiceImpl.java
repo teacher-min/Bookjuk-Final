@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+
 import org.springframework.stereotype.Service;
+
 import com.bookjuk.api.portone.CustomPaymentClient;
 import com.bookjuk.api.portone.response.CustomPayment;
 import com.bookjuk.cart.service.ICartService;
+import com.bookjuk.config.EnvConfig;
 import com.bookjuk.order.domain.User;
 import com.bookjuk.order.dto.OrderDto;
 import com.bookjuk.order.dto.OrderItemDto;
@@ -25,6 +28,7 @@ import com.bookjuk.port.one.request.SyncPaymentException;
 import com.bookjuk.port.one.service.IPaymentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.portone.sdk.server.payment.CancelPaymentBodyRefundAccount;
 import io.portone.sdk.server.payment.CancelRequester;
 import io.portone.sdk.server.payment.PaidPayment;
@@ -61,15 +65,15 @@ public class PaymentServiceImpl implements IPaymentService {
   // 포트원 결제 클라이언트와 커스텀 결제 클라이언트, 그리고 웹훅 검증 객체를 초기화합니다.
   // 실제 환경에서는 비밀정보를 별도 프로퍼티 파일이나 시크릿 매니저로 관리해야 합니다.
   private final PaymentClient       portone        = new PaymentClient(
-      "pWw5BI1fPoncJnEuZ6PF5ILF9Svx3hLEu2UaAg72S5XJbJa5yEHgQFAT5eYVXJRjUnhypozpWzhHvGeg",
+      EnvConfig.getPortoneSecretApi(),
       "https://api.portone.io", null
   );
   private final CustomPaymentClient customPortone  = new CustomPaymentClient(
-      "pWw5BI1fPoncJnEuZ6PF5ILF9Svx3hLEu2UaAg72S5XJbJa5yEHgQFAT5eYVXJRjUnhypozpWzhHvGeg",
+      EnvConfig.getPortoneSecretApi(),
       "https://api.portone.io", null
   );
   private final WebhookVerifier     portoneWebhook = new WebhookVerifier(
-      "whsec_+wCY1q64BB0Mm2BzrPr4UXIIA3UDowwJu6SIE4e8S14="
+      EnvConfig.getPortoneSecretWebhook()
   );
 
   /**

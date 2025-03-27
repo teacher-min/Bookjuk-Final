@@ -28,7 +28,6 @@ public class ProductListController {
 
 	private final ProductListService productListService;
 	
-	
 	// 신규 상품 리스트 조회
 	@Operation(summary = "신규 상품 목록 조회", description = "신규 상품 목록 조회")
 	@GetMapping(value = "/product/new", produces = "application/json")
@@ -43,7 +42,6 @@ public class ProductListController {
 				             .results(productListService.findProductList(startDate, endDate, genreId, pageable))
 				             .build();
 	}
-	
 	
 	// 상품 상세 + 상품 문의글 + 상품 리뷰 글 조회	
 	@Operation(summary = "상품 상세, 문의글, 리뷰글 조회", description = "상품 상세, 문의글, 리뷰글 조회")
@@ -77,7 +75,6 @@ public class ProductListController {
 				     .build();
 	}
 	
-	
 	// 인기 상품 리스트 조회
 	@Operation(summary = "인기 상품 목록 조회", description = "인기 상품 목록 조회")
 	@GetMapping(value="/product/popular", produces = "application/json")
@@ -90,6 +87,5 @@ public class ProductListController {
 								.results(productListService.findPopularProductList(genreId, pageable))
 								.build();
 	}	
-	
 	
 }	

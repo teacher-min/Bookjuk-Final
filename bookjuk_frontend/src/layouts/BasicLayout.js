@@ -4,7 +4,6 @@
  * Developer : 김리예
  */
 
-import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';

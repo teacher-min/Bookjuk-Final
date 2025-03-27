@@ -4,23 +4,30 @@
  * Developer : 김민희
  */
 
-import { Route, Routes } from 'react-router-dom';
-import SecondHandPage from '../pages/secondhand/SecondHandPage';
-import SecondHandRegistPage from '../pages/secondhand/SecondHandRegistPage';
-import SecondHandDetailPage from '../pages/secondhand/SecondHandDetailPage';
-import SecondHandModifyPage from '../pages/secondhand/SecondHandModifyPage';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+const Loading = <div>Loading...</div>
+const SecondHandPage = lazy(() => import('../pages/secondhand/SecondHandPage'))
+const SecondHandRegistPage = lazy(() => import('../pages/secondhand/SecondHandRegistPage'))
+const SecondHandDetailPage = lazy(() => import('../pages/secondhand/SecondHandDetailPage'))
+const SecondHandModifyPage = lazy(() => import('../pages/secondhand/SecondHandModifyPage'))
 
 const SecondhandRoutes = () => {
+
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<SecondHandPage />} />
-        <Route path="/regist" element={<SecondHandRegistPage />} />
-        <Route path="/detail/:id" element={<SecondHandDetailPage />} />
-        <Route path="/modify/:id" element={<SecondHandModifyPage />} />
-      </Routes>
-    </>
+    <BrowserRouter>
+      <Suspense fallback={Loading}>
+        <Routes>
+          <Route path="/" element={SecondHandPage} />
+          <Route path="/regist" element={SecondHandRegistPage} />
+          <Route path="/detail/:id" element={SecondHandDetailPage} />
+          <Route path="/modify/:id" element={SecondHandModifyPage} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
+
 };
 
 export default SecondhandRoutes;
